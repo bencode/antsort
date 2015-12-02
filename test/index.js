@@ -1,8 +1,8 @@
 var sort = require('..');
 
 
-describe('antsort', function() {
-  it('should sort items by level, before and after', function() {
+describe('antsort', () => {
+  it('should sort items by level, before and after', () => {
     var list = [
       {
         name: 'b',
@@ -22,6 +22,11 @@ describe('antsort', function() {
       {
         name: 'd',
         level: 1
+      },
+
+      {
+        name: 'o',
+        level: 3
       },
 
       {
@@ -65,12 +70,13 @@ describe('antsort', function() {
 
     list.should.not.equal(sorted);
 
-    sorted.map(byName)
-        .should.be.eql(['c', 'n', 'm', 'd', 'e', 'b', 'a', 'h', 'k', 'f', 'g']);
+    sorted.map(item => item.name)
+        .should.be.eql(['c', 'n', 'm', 'd', 'e',
+            'b', 'a', 'h', 'k', 'o', 'f', 'g']);
   });
 
 
-  it('should preserve index when item not have level', function() {
+  it('should preserve index when item not have level', () => {
     var list = [
       {
         name: 'a',
@@ -87,12 +93,12 @@ describe('antsort', function() {
       }
     ];
 
-    sort(list).map(byName)
+    sort(list).map(item => item.name)
         .should.be.eql(['a', 'b', 'c']);
   });
 
 
-  it('should throw error when item not found', function() {
+  it('should throw error when item not found', () => {
     var list = [
       {
         name: 'a'
@@ -104,9 +110,8 @@ describe('antsort', function() {
       }
     ];
 
-    (function() {
-      sort(list);
-    }).should.throw(/can not find item `c`/);
+    (() => sort(list))
+        .should.throw(/can not find item `c`/);
 
 
     list = [
@@ -120,14 +125,42 @@ describe('antsort', function() {
       }
     ];
 
-    (function() {
-      sort(list);
-    }).should.throw();
+    (() => sort(list))
+        .should.throw();
+  });
+
+
+  it('readme case', () => {
+    var list = [
+      {
+        name: 'a',
+        level: 3
+      },
+
+      {
+        name: 'b',
+        level: 4
+      },
+
+      {
+        name: 'c',
+        before: 'b'
+      },
+
+      {
+        name: 'd',
+        level: 3
+      },
+
+      {
+        name: 'e',
+        after: 'a'
+      }
+    ];
+
+
+    var sorted = sort(list);
+    sorted.map(item => item.name)
+        .should.be.eql(['a', 'e', 'd', 'c', 'b']);
   });
 });
-
-
-function byName(item) {
-  return item.name;
-}
-

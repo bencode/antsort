@@ -8,3 +8,39 @@
 `Another sort` - sort elements by level, before and afte.
 
 
+``js
+var sort = require('antsort');
+
+var list = [
+  {
+    name: 'a',
+    level: 3
+  },
+
+  {
+    name: 'b',
+    level: 4
+  },
+
+  {
+    name: 'c',
+    before: 'b'
+  },
+
+  {
+    name: 'd',
+    level: 3
+  },
+
+  {
+    name: 'e',
+    after: 'a'
+  }
+];
+
+
+var sorted = sort(list);
+
+sorted.map(item => item.name)
+    .should.be.eql(['a', 'e', 'd', 'c', 'b']);
+``
