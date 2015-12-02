@@ -1,0 +1,30 @@
+{
+  "name": "antsort",
+  "version": "1.0.0",
+  "description": "`Another sort` - sort elements by level, before and afte.",
+  "main": "lib/index.js",
+  "scripts": {
+    "lint": "node ./node_modules/.bin/eslint lib test",
+    "test": "node ./node_modules/.bin/_mocha --harmony --require 'should' --reporter spec --recursive --bail --check-leaks test/",
+    "cov": "node --harmony ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -u exports --require 'should' --recursive --bail --check-leaks test/",
+    "travis": "node --harmony ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -u exports --require 'should' --recursive --bail --check-leaks test/",
+    "all": "npm run lint && npm run test && npm run cov"
+  },
+  "devDependencies": {
+    "eslint": "~1.10.3",
+    "eslint-config-bce": "~0.1.0",
+    "istanbul": "~0.4.1",
+    "mocha": "~2.3.4",
+    "should": "~7.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bencode/antsort.git"
+  },
+  "author": "bencode@163.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bencode/antsort/issues"
+  },
+  "homepage": "https://github.com/bencode/antsort#readme"
+}
