@@ -2,7 +2,7 @@ var sort = require('..');
 
 
 describe('antsort', function() {
-  it('sort with level', function() {
+  it('should sort items by level, before and after', function() {
     var list = [
       {
         name: 'b',
@@ -25,6 +25,11 @@ describe('antsort', function() {
       },
 
       {
+        name: 'h',
+        before: 'k'
+      },
+
+      {
         name: 'e',
         level: 2
       },
@@ -37,6 +42,21 @@ describe('antsort', function() {
       {
         name: 'g',
         level: 4
+      },
+
+      {
+        name: 'k',
+        after: 'a'
+      },
+
+      {
+        name: 'm',
+        after: 'n'
+      },
+
+      {
+        name: 'n',
+        after: 'c'
       }
     ];
 
@@ -45,8 +65,69 @@ describe('antsort', function() {
 
     list.should.not.equal(sorted);
 
-    sorted.map(function(item) {
-      return item.name;
-    }).should.be.eql(['c', 'd', 'e', 'b', 'a', 'f', 'g']);
+    sorted.map(byName)
+        .should.be.eql(['c', 'n', 'm', 'd', 'e', 'b', 'a', 'h', 'k', 'f', 'g']);
+  });
+
+
+  it('should preserve index when item not have level', function() {
+    var list = [
+      {
+        name: 'a',
+        level: 1
+      },
+
+      {
+        name: 'b'
+      },
+
+      {
+        name: 'c',
+        level: 1
+      }
+    ];
+
+    sort(list).map(byName)
+        .should.be.eql(['a', 'b', 'c']);
+  });
+
+
+  it('should throw error when item not found', function() {
+    var list = [
+      {
+        name: 'a'
+      },
+
+      {
+        name: 'b',
+        before: 'c'
+      }
+    ];
+
+    (function() {
+      sort(list);
+    }).should.throw(/can not find item `c`/);
+
+
+    list = [
+      {
+        name: 'a'
+      },
+
+      {
+        name: 'b',
+        after: 'c'
+      }
+    ];
+
+    (function() {
+      sort(list);
+    }).should.throw();
   });
 });
+
+
+function byName(item) {
+  return item.name;
+}
+
