@@ -76,7 +76,7 @@ describe('antsort', () => {
   });
 
 
-  it('should preserve index when item not have level', () => {
+  it('should work with default level', () => {
     var list = [
       {
         name: 'a',
@@ -84,7 +84,7 @@ describe('antsort', () => {
       },
 
       {
-        name: 'b'
+        name: 'b'  // will be last
       },
 
       {
@@ -94,7 +94,10 @@ describe('antsort', () => {
     ];
 
     sort(list).map(item => item.name)
-        .should.be.eql(['a', 'b', 'c']);
+        .should.be.eql(['a', 'c', 'b']);
+
+    sort(list, { defaultLevel: 0 }).map(item => item.name)
+        .should.be.eql(['b', 'a', 'c']);
   });
 
 
