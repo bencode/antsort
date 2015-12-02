@@ -8,7 +8,7 @@
 `Another sort` - sort elements by level, before and afte.
 
 
-``js
+```js
 var sort = require('antsort');
 
 var list = [
@@ -43,4 +43,4 @@ var sorted = sort(list);
 
 sorted.map(item => item.name)
     .should.be.eql(['a', 'e', 'd', 'c', 'b']);
-``
+```
