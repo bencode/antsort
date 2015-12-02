@@ -2,7 +2,6 @@
 ==================
 
  * docs: fix travis
- * chore: fix travis
  * docs: add coverage
  * chore: add travis.yml
  * docs: fix code style
