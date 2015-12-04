@@ -1,8 +1,8 @@
 var sort = require('..');
 
 
-describe('antsort', () => {
-  it('should sort items by level, before and after', () => {
+describe('antsort', function() {
+  it('should sort items by level, before and after', function() {
     var list = [
       {
         name: 'b',
@@ -76,7 +76,7 @@ describe('antsort', () => {
   });
 
 
-  it('should work with default level', () => {
+  it('should work with default level', function() {
     var list = [
       {
         name: 'a',
@@ -101,7 +101,7 @@ describe('antsort', () => {
   });
 
 
-  it('should throw error when item not found', () => {
+  it('should throw error when item not found', function() {
     var list = [
       {
         name: 'a'
@@ -133,7 +133,7 @@ describe('antsort', () => {
   });
 
 
-  it('readme case', () => {
+  it('readme case', function() {
     var list = [
       {
         name: 'a',
