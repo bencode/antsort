@@ -7,13 +7,13 @@
     "lint": "node ./node_modules/.bin/eslint lib test",
     "test": "node ./node_modules/.bin/_mocha --harmony --require 'should' --reporter spec --recursive --bail --check-leaks test/",
     "cov": "node ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -u exports --require 'should' --recursive --bail --check-leaks test/",
-    "ci": "node ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -u exports --require 'should' --recursive --bail --check-leaks test/",
+    "travis": "node ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -u exports --require 'should' --recursive --bail --check-leaks test/",
     "all": "npm run lint && npm run test && npm run cov"
   },
   "git-pre-hooks": {
     "pre-commit": "npm run lint",
     "pre-push": "npm run test",
-    "pre-release": "npm run ci",
+    "pre-release": "npm run travis",
     "post-release": "npm publish"
   },
   "devDependencies": {
